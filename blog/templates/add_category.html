@@ -13,8 +13,12 @@
     Help readers to navigate through diverse topics
 {% endblock %}
 
-{% block header_image %}
-<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
 {% endblock %}
 
 {% block content %}

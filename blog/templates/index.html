@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Elinit
+{% endblock %}
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Hello world!
+{% endblock %}
+
+{% block subheading %}
+    Welcome to Eliška's website
+{% endblock %}
+
+{% block content %}
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-8">
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="#">
+                    <h2 class="post-title">Něco sem budu muset napsat</h2>
+                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 24, 2021
+                </p>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

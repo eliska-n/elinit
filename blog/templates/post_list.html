@@ -1,0 +1,68 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Blog
+{% endblock %}
+
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Blog
+{% endblock %}
+
+{% block subheading %}
+    All posts
+{% endblock %}
+
+{% block content %}
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5"> <!-- zarovnává zleva a zprava na šířku stránky - podle levého a pravého okraje textu v navigační liště -->
+    <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- tohle centruje text ve vertikálním směru - zdá se mi to skoro k ničemu -->
+        <div class="col-md-10 col-lg-8 col-xl-8">  <!-- tohle vysekává úzký sloupeček uprostřed -->
+            
+            {% for post in object_list %}
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="{% url 'post' post.pk %}">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                </a>
+                <a>
+                    <h3 class="post-subtitle">{{ post.subtitle|safe }}</h3>
+                </a>
+                <p class="post-meta">
+                    {% if post.author.profile.id %}
+                    By
+                    <a href="{% url 'profile_page' post.author.profile.id %}">{{post.author.first_name}} {{post.author.last_name}}</a>
+                    on {{post.date}}
+                    {% endif %}
+                    <br/>
+                    {% if post.category is not None %}
+                    <small>Category: <a href="{% url 'category' post.category|slugify %}"> {{post.category}} </a> </small>
+                    {% endif %}
+                </p>
+                <p class="post-meta">
+                    {% if user.is_authenticated %}
+                        {% if post.author.id == user.id or user.id == 1 %}
+                            <small> <a href="{% url 'edit_post' post.pk %}"> Edit post</a> | </small> 
+                            <small> <a href="{% url 'delete_post' post.pk %}"> Delete post</a> </small>
+                        {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

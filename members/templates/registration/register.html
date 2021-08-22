@@ -1,0 +1,50 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Register
+{% endblock %}
+
+{% block subheading %}
+    Register and welcome to my webpage
+{% endblock %}
+
+{% block content %}
+<!-- Main Content-->
+        <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-8">
+        
+                    <div class="mb-3">
+                        <form method = "POST">
+                            <div class="form-floating">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type = "submit" class="btn btn-primary text-uppercase active" id="submitButton" value = "Register" >
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<small> Please note that my system is still quite lame and it cannot reset your password if you forget it. So I would like to recommend you to write it down.
+    Hope I will manage to improve it soon.
+</small>
+
+{% endblock %}

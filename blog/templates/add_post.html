@@ -1,0 +1,57 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Add New Post
+{% endblock %}
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Add New Post
+{% endblock %}
+
+{% block subheading %}
+    Tell the world what's important to you
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-8">
+    
+                <div class="mb-3">
+                    <form method = "POST" enctype="multipart/form-data">
+                        <div class="form-floating">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.as_p }}
+                            <input type = "submit" class="btn btn-primary text-uppercase active" id="submitButton" value = "Add Post" >
+                        </div>
+                    </form>
+                    <script>
+                        var name = "{{ user.id }}";
+                        document.getElementById("jsusername").value = 
+                            name;
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% else %}
+    <p>You are not allowed here! Get out!</p>
+{% endif %}
+{% endblock %}

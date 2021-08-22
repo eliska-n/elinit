@@ -1,0 +1,43 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Categories
+{% endblock %}
+
+{% block subheading %}
+    Choose the topic!
+{% endblock %}
+
+{% block content %}
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5"> <!-- zarovnává zleva a zprava na šířku stránky - podle levého a pravého okraje textu v navigační liště -->
+    <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- tohle centruje text ve vertikálním směru - zdá se mi to skoro k ničemu -->
+        <div class="col-md-10 col-lg-8 col-xl-8">  <!-- tohle vysekává úzký sloupeček uprostřed -->
+            
+            {% for item in object_list %}
+            <div class="post-preview">
+                <a href="{% url 'category' item|slugify %}">
+                    <h2 class="post-title"> {{item.cat_name}} </h2>
+                </a>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

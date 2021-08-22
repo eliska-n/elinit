@@ -1,0 +1,47 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Add Category
+{% endblock %}
+
+{% block heading %}
+    Add Category
+{% endblock %}
+
+{% block subheading %}
+    Help readers to navigate through diverse topics
+{% endblock %}
+
+{% block header_image %}
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-8">
+    
+                <div class="mb-3">
+                    <form method = "POST">
+                        <div class="form-floating">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type = "submit" class="btn btn-primary text-uppercase active" id="submitButton" value = "Add Category" >
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% else %}
+    <p>You are not allowed here! Get out!</p>
+{% endif %}
+{% endblock %}

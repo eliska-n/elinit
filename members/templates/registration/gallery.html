@@ -1,0 +1,90 @@
+{% extends "base_blog.html" %}
+{% load static %}
+
+{% block title %}
+    Your gallery
+{% endblock %}
+
+{% block bgimg %}
+<style>
+    header.masthead {
+    background-image: url("{% static 'blog/images/elinit_unicorns.png' %}");
+    }
+</style>
+{% endblock %}
+
+{% block heading %}
+    Your Gallery
+{% endblock %}
+
+{% block subheading %}
+    Save your images and use them in your posts
+{% endblock %}
+
+{% block content %}
+
+<!-- Main Content-->
+{% if user.is_authenticated %}
+    {% if user.id == page_user.user.id %}
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-8">
+                        <div class="text-center">
+                            <p> This gallery is (should be) private. Noone except you can see your gallery. You can share the pictures in your posts using their URLs in the text editor. </p>
+                            <a href="{% url 'add_image' page_user.id %}" class="btn btn-primary text-uppercase active" >Add Image</a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+
+                    {% for image in gallery %}
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <img src="{{ image.gallery_img.url }}" class="card-img-top">
+                                <div class="card-body">
+                                    {% if image.img_text %}
+                                    <h5 class="card-title">{{ image.img_text }}</h5>
+                                    {% endif %}
+                                    <p class="card-text"><small class="text-muted">Copy url to clipboard to use the image in text editor.</small></p>
+
+                                    <p type="text" id="url" style="display:none">{{ image.gallery_img.url }}</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="text-center">
+                                                <button onclick="copyToClipboard('#url')" class="btn btn-primary" >Copy URL</button>
+
+                                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                                                    <script>
+                                                        function copyToClipboard(element) {
+                                                            var $temp = $("<input>");
+                                                            $("body").append($temp);
+                                                            $temp.val($(element).text()).select();
+                                                            document.execCommand("copy");
+                                                            $temp.remove();
+                                                            }
+                                                    </script>
+                                                    <!-- This script allows me to copy url to clipboard without showing the url on the page. I got it from here: https://codepen.io/shaikmaqsood/pen/XmydxJ -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="text-center">
+                                                <a href="{% url 'delete_image' image.id %}" class="btn btn-danger text-uppercase active" >Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                </div>
+            </div>
+        </main>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

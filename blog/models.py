@@ -27,7 +27,7 @@ class Profile(models.Model):
     facebook_url = models.CharField(max_length=300, null=True, blank=True)
     linkedin_url = models.CharField(max_length=300, null=True, blank=True)
     any_other_url = models.CharField(max_length=300, null=True, blank=True)
-    gallery_images = models.ManyToManyField("GalleryImg", related_name="profile_gallery")
+    gallery_images = models.ManyToManyField("GalleryImg", related_name="profile_gallery", blank=True)
 
     def __str__(self):
         return str(self.user)

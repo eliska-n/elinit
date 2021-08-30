@@ -46,7 +46,7 @@
                     {% endif %}
                     <br/>
                     {% if post.category is not None %}
-                    <small>Category: <a href="{% url 'category' post.category|slugify %}"> {{post.category}} </a> </small>
+                    <small>Category: <a href="{% url 'category' post.category|slugify %}" style="text-transform:uppercase"> {{post.category}} </a> </small>
                     {% endif %}
                 </p>
                 <p class="post-meta">

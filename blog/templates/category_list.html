@@ -31,7 +31,7 @@
             {% for item in object_list %}
             <div class="post-preview">
                 <a href="{% url 'category' item|slugify %}">
-                    <h2 class="post-title"> {{item.cat_name}} </h2>
+                    <h2 class="post-title" style="text-transform:uppercase"> {{item.cat_name}} </h2>
                 </a>
             <!-- Divider-->
             <hr class="my-4" />
